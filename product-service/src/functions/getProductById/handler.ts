@@ -5,6 +5,7 @@ import { formatJSONResponse } from "@libs/apiGateway";
 import { middyfy } from "@libs/lambda";
 
 import productList from "./../productList.json";
+// import { debug } from "console";
 // import schema from "./schema";
 
 const getProductById: ValidatedEventAPIGatewayProxyEvent<Object> = async (
@@ -14,7 +15,7 @@ const getProductById: ValidatedEventAPIGatewayProxyEvent<Object> = async (
 	let message: string;
 	let product = productList.find((el) => el.id === productId);
 
-	console.log(productId);
+	// console.log(productId);
 
 	if (product === undefined) {
 		message = "Product not found";
@@ -22,9 +23,11 @@ const getProductById: ValidatedEventAPIGatewayProxyEvent<Object> = async (
 		message = "";
 	}
 
-	console.log(product);
+	// console.log(product);
 
-	console.log(event);
+	// console.trace(event);
+	// debug(message)
+	console.debug(event)
 	return formatJSONResponse({
 		statusCode: 200,
 		headers: {
