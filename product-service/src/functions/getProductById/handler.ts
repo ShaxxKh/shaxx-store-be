@@ -27,7 +27,7 @@ const getProductById: ValidatedEventAPIGatewayProxyEvent<Object> = async (
 
 	// console.trace(event);
 	// debug(message)
-	console.debug(event)
+	// console.debug(event)
 	return formatJSONResponse({
 		statusCode: 200,
 		headers: {
@@ -43,3 +43,4 @@ const getProductById: ValidatedEventAPIGatewayProxyEvent<Object> = async (
 };
 
 export const main = middyfy(getProductById);
+export const byId = getProductById;
