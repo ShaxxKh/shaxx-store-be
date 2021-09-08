@@ -4,11 +4,13 @@ import type { ValidatedEventAPIGatewayProxyEvent } from "@libs/apiGateway";
 import { formatJSONResponse } from "@libs/apiGateway";
 import { middyfy } from "@libs/lambda";
 
-import productList from "./../productList.json";
+import getProducts from "@libs/getProducts";
+// import productList from "./../productList.json";
 // import schema from "./schema";
 
 const getProductsList: ValidatedEventAPIGatewayProxyEvent<Object> =
 	async () => {
+		const productList = await getProducts();
 		let message: string;
 		if (productList.length === 0) {
 			message = "No products";

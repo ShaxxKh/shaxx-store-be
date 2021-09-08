@@ -4,13 +4,15 @@ import type { ValidatedEventAPIGatewayProxyEvent } from "@libs/apiGateway";
 import { formatJSONResponse } from "@libs/apiGateway";
 import { middyfy } from "@libs/lambda";
 
-import productList from "./../productList.json";
+import getProducts from '@libs/getProducts'
+// import productList from "./../../productList.json";
 // import { debug } from "console";
 // import schema from "./schema";
 
 const getProductById: ValidatedEventAPIGatewayProxyEvent<Object> = async (
 	event
 ) => {
+	const productList = await getProducts();
 	const productId = event.pathParameters.id;
 	let message: string;
 	let product = productList.find((el) => el.id === productId);
