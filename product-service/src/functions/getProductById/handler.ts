@@ -24,12 +24,7 @@ const getProductById: ValidatedEventAPIGatewayProxyEvent<Object> = async (
 	} else {
 		message = "";
 	}
-
-	// console.log(product);
-
-	// console.trace(event);
-	// debug(message)
-	// console.debug(event)
+	
 	return formatJSONResponse({
 		statusCode: 200,
 		headers: {
