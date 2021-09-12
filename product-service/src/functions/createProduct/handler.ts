@@ -14,6 +14,7 @@ import validator from "@middy/validator";
 const createProduct: ValidatedEventAPIGatewayProxyEvent<Object> = async (
   event
 ) => {
+  console.log("Request: " + JSON.stringify(event));
   console.log("Request: " + event);
 
   const { count, price, title, description } = Object(event.body);

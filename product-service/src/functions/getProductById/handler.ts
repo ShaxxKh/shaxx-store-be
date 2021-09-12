@@ -11,7 +11,7 @@ import sql from "sql-tagged-template-literal";
 const getProductById: ValidatedEventAPIGatewayProxyEvent<Object> = async (
   event
 ) => {
-  console.log("Request: " + event);
+  console.log("Request: " + JSON.stringify(event));
   const client = new Client(dbOptions);
   client.connect();
 
