@@ -1,0 +1,24 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "title": "Create Product",
+    "type": "object",
+    "properties": {
+        "title": {
+            "description": "Product Title",
+            "type": "string"
+        },
+        "description": {
+            "description": "Product Description",
+            "type": "string"
+        },
+        "price": {
+            "description": "Product Price",
+            "type": "integer"
+        },
+        "count": {
+            "description": "Quantity of products",
+            "type": "integer"
+        }
+    },
+    "required": ["title", "description", "price", "count"]
+}
