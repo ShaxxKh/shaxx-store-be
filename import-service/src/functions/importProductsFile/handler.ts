@@ -5,27 +5,35 @@ import { formatJSONResponse } from '@libs/apiGateway';
 import { middyfy } from '@libs/lambda';
 const AWS = require( "aws-sdk" );
 
-const hello: ValidatedEventAPIGatewayProxyEvent<Object> = async ( event ) => {
+const importProductsFile: ValidatedEventAPIGatewayProxyEvent<Object> = async ( event ) => {
   console.log( "Request: " + JSON.stringify( event ) );
   const s3 = new AWS.S3( { region: "eu-west-1" } );
   const { name } = event.queryStringParameters;
-  const bucket = "task-5";
   const catalogPath = `uploaded/${name}`;
+  let signedUrl: any;
+  let statusCode = 200;
 
   const params = {
-    Bucket: bucket,
+    Bucket: process.env.BUCKET,
     Key: catalogPath,
     Expires: 60,
     ContentType: "text/csv"
   };
 
-  const signedUrl = await s3.getSignedUrlPromise( 'putObject', params );
-  // const signedUrl = name;
+  if ( name ) {
+    signedUrl = await s3.getSignedUrlPromise( 'putObject', params );
+
+  } else {
+    statusCode = 403;
+  }
+
 
   console.log( signedUrl );
 
+  console.log( formatJSONResponse( statusCode, signedUrl ) );
 
-  return formatJSONResponse( signedUrl );
+
+  return formatJSONResponse( statusCode, signedUrl );
 };
 
-export const main = middyfy( hello );
+export const main = middyfy( importProductsFile );
